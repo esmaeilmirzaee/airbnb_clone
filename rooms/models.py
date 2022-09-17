@@ -22,3 +22,5 @@ class Room(core_model.TimeStampedModel):
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(user_model.User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
