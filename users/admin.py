@@ -4,4 +4,8 @@ from . import models
 
 @admin.register(models.User)
 class CustomAdminUser(admin.ModelAdmin):
-        pass
+    list_display = ('username', 'superhost', 'language', 'currency',)
+    list_filter = ('superhost',)
+
+
+# admin.site.register(models.User, CustomAdminUser)

@@ -10,7 +10,7 @@ class User(AbstractUser):
 
     GENDER_CHOICES = (
         (MALE_GENDER, 'Male'),
-        (FEMALE_GENDER, 'female'),
+        (FEMALE_GENDER, 'Female'),
         (RATHER_GENDER, 'Rather Not Say'),
     )
 
@@ -20,13 +20,15 @@ class User(AbstractUser):
     CURRENCY_CHOICES = ((CURRENCY_USA, 'USD'), (CURRENCY_PERSIAN, 'IRL'))
 
     LANGUAGE_ENGLISH = 'en'
+
     LANGUAGE_PERSIAN = 'fa'
 
     LANGUAGE_CHOICES = ((LANGUAGE_ENGLISH, 'en'), (LANGUAGE_PERSIAN, 'fa'))
 
-    avatar = models.ImageField(null=True, required=False)
-    bio = models.TextField(default='', null=True)
-    gender = models.CharField(max_length=14, null=True, choices=GENDER_CHOICES, default=RATHER_GENDER)
-    birthday = models.DateField(null=True, required=False)
+    avatar = models.ImageField(null=True, blank=True, default='avatar.png', upload_to='user_avatars')
+    bio = models.TextField(default='', null=True, blank=True)
+    gender = models.CharField(max_length=14, default=RATHER_GENDER, blank=True, null=True, choices=GENDER_CHOICES)
+    birthdate = models.DateField(null=True, blank=True)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=CURRENCY_USA)
     language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES, default=LANGUAGE_ENGLISH)
+    superhost = models.BooleanField(default=False)
