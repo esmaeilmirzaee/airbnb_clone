@@ -42,7 +42,7 @@ class Facility(AbstractItem):
 
 class Photo(core_model.TimeStampedModel):
     caption = models.CharField(max_length=100)
-    file = models.ImageField(upload_to='images')
+    file = models.ImageField(upload_to='rooms')
     room = models.ForeignKey('Room', related_name='photos', on_delete=models.CASCADE)
 
     class Meta:

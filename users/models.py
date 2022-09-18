@@ -25,7 +25,7 @@ class User(AbstractUser):
 
     LANGUAGE_CHOICES = ((LANGUAGE_ENGLISH, 'en'), (LANGUAGE_PERSIAN, 'fa'))
 
-    avatar = models.ImageField(blank=True, default='avatar.png', upload_to='user_avatars')
+    avatar = models.ImageField(blank=True, default='avatar.png', upload_to='avatar')
     bio = models.TextField(blank=True)
     gender = models.CharField(max_length=14, default=RATHER_GENDER, blank=True, choices=GENDER_CHOICES)
     birthdate = models.DateField(null=True, blank=True)
