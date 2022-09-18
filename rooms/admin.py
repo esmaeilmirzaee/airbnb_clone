@@ -5,7 +5,13 @@ from . import models
 
 @admin.register(models.TypeOfRoom, models.HouseRule, models.Facility, models.Amenity)
 class TypeOfRoomAdmin(admin.ModelAdmin):
-    ...
+    list_display = (
+        'name',
+        'used_by',
+    )
+
+    def used_by(self, obj):
+        return obj.rooms.count()
 
 
 class RoomsAdmin(admin.ModelAdmin):
