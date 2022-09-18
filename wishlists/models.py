@@ -11,3 +11,5 @@ class Wishlists(core_models.TimeStampedModel):
     def __str__(self):
         return f'{self.name} | {self.rooms.count()}'
 
+    def number_of_rooms(self):
+        return f'{self.rooms.count()}'
