@@ -15,8 +15,10 @@ class RoomsAdmin(admin.ModelAdmin):
         'city',
         'country',
         'price',
-        'instant_book'
+        'instant_book',
+        'number_of_amenities',
     )
+
     fieldsets = (
         (
             'Basic Info',
@@ -45,9 +47,15 @@ class RoomsAdmin(admin.ModelAdmin):
         ),
     )
 
+    ordering = ('name', 'country',)
     list_filter = ('country', 'city',)
     search_fields = ('city', '=name', '^host__username')
     filter_horizontal = ("amenities", 'facilities', 'house_rules',)  # By default, just many to many
+
+    def number_of_amenities(self, obj):
+        return obj.amenities.count()
+
+    number_of_amenities.short_description = 'Number of Amenities'
 
 
 @admin.register(models.Photo)
