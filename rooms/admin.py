@@ -24,6 +24,7 @@ class RoomsAdmin(admin.ModelAdmin):
         'instant_book',
         'number_of_amenities',
         'number_of_photos',
+        'total_ratings',
     )
 
     fieldsets = (

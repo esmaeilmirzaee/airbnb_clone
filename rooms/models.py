@@ -1,3 +1,5 @@
+import decimal
+
 from django.db import models
 from django_countries.fields import CountryField
 
@@ -74,3 +76,13 @@ class Room(core_model.TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def total_ratings(self):
+        all_reviews = self.reviews.all()
+        total_rating = 0
+        for review in all_reviews:
+            total_rating += review.rating_average()
+
+        total_avg = total_rating / len(all_reviews)
+
+        return round(total_avg, 2)

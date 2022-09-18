@@ -11,8 +11,12 @@ class Review(TimeStampedModel):
     location = models.DecimalField(decimal_places=1, max_digits=2)
     check_in = models.DecimalField(decimal_places=1, max_digits=2)
     value = models.DecimalField(decimal_places=1, max_digits=2)
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    room = models.ForeignKey('rooms.Room', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', related_name='reviews', on_delete=models.CASCADE)
+    room = models.ForeignKey('rooms.Room', related_name='reviews', on_delete=models.CASCADE)
+
+    def rating_average(self):
+        avg = (self.accuracy + self.cleanliness + self.communication + self.value + self.location + self.check_in) / 4
+        return round(avg, 2)
 
     def __str__(self):
         return f'{self.room} by {self.user.username.upper()}'
