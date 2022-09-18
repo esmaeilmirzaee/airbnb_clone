@@ -17,6 +17,7 @@ class RoomsAdmin(admin.ModelAdmin):
         'price',
         'instant_book',
         'number_of_amenities',
+        'number_of_photos',
     )
 
     fieldsets = (
@@ -56,6 +57,9 @@ class RoomsAdmin(admin.ModelAdmin):
         return obj.amenities.count()
 
     number_of_amenities.short_description = 'Number of Amenities'
+
+    def number_of_photos(self, obj):
+        return obj.photos.count()
 
 
 @admin.register(models.Photo)

@@ -41,7 +41,7 @@ class Facility(AbstractItem):
 class Photo(core_model.TimeStampedModel):
     caption = models.CharField(max_length=100)
     file = models.ImageField(upload_to='images')
-    room = models.ForeignKey('Room', on_delete=models.CASCADE)
+    room = models.ForeignKey('Room', related_name='photos', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Photo'
@@ -66,11 +66,11 @@ class Room(core_model.TimeStampedModel):
     check_in = models.TimeField()
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
-    host = models.ForeignKey(user_model.User, on_delete=models.CASCADE)
-    room_type = models.ForeignKey(TypeOfRoom, on_delete=models.SET_NULL, null=True, blank=True)
-    amenities = models.ManyToManyField(Amenity, blank=True)
-    facilities = models.ManyToManyField(Facility, blank=True)
-    house_rules = models.ManyToManyField(HouseRule, blank=True)
+    host = models.ForeignKey(user_model.User, related_name='rooms', on_delete=models.CASCADE)
+    room_type = models.ForeignKey(TypeOfRoom, related_name='room_types', on_delete=models.SET_NULL, null=True, blank=True)
+    amenities = models.ManyToManyField(Amenity, related_name='rooms', blank=True)
+    facilities = models.ManyToManyField(Facility, related_name='rooms', blank=True)
+    house_rules = models.ManyToManyField(HouseRule, related_name='rooms', blank=True)
 
     def __str__(self):
         return self.name
